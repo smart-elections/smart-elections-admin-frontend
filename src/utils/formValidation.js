@@ -62,3 +62,6 @@ export const addElectionFormValidation = (setFormErrors, name, value) => {
         return errorStateObj;
     });
 };
+
+const validateForm = (formErrors, formData) => {
+}
