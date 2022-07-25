@@ -58,14 +58,12 @@ const App = () => {
             <Routes>
               <Route path='/'>
                 <Route index element={<Navigate to='elections/view-all' />} />
-
                 {/* "citizens/view-all"
                 "citizens/add-new-citizen" */}
                 <Route path='citizens'>
                   <Route path='view-all' element={<AllCitizens />} />
                   <Route path='add-new-citizen' element={<AddNewCitizens />} />
                 </Route>
-
                 {/* "accounts/view-all"
                 "accounts/create-new" */}
                 <Route path='accounts'>
@@ -75,7 +73,6 @@ const App = () => {
                     element={<CreateNewAccounts />}
                   />
                 </Route>
-
                 {/* "candidates/view-all"
                 "candidates/add-new-candidate" */}
                 <Route path='candidates'>
@@ -85,7 +82,6 @@ const App = () => {
                     element={<AddNewCandidate />}
                   />
                 </Route>
-
                 {/* "elections/view-all"
                 "elections/add-new-election" */}
                 <Route path='elections'>
