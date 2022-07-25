@@ -123,7 +123,7 @@ export const addElectionInputs = [
     id: 4,
     name: 'election_start',
     type: 'date',
-    min: '2022-25-01',
+    min: '2022-07-25',
     placeholder: 'Election Start Date',
     required: true,
     label: 'Election Start Date',
