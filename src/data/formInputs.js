@@ -49,3 +49,38 @@ export const addCandidateInputs = [
         label: 'Candidate Nationality'
     }
 ];
+
+export const addCitizenInputs = [
+    {
+        id: 1,
+        name: 'citizen_ssn',
+        type: 'text',
+        placeholder: 'Social Security Number',
+        required: true,
+        label: 'Social Security Number',
+    },
+    {
+        id: 2,
+        name: 'citizen_nationality',
+        type: 'text',
+        placeholder: 'Nationality',
+        required: true,
+        label: 'Citizen Nationality'
+    },
+    {
+        id: 3,
+        name: 'citizen_firstname',
+        type: 'text',
+        placeholder: 'First Name',
+        required: true,
+        label: 'Citizen First Name'
+    },
+    {
+        id: 4,
+        name: 'citizen_lastname',
+        type: 'text',
+        placeholder: 'Last Name',
+        required: true,
+        label: 'Citizen Last Name'
+    }
+]
