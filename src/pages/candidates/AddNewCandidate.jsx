@@ -5,8 +5,6 @@ import { addCandidateFormValidation } from '../../utils/formValidation';
 import FormInput from '../../components/formInput/FormInput';
 import { addCandidateInputs } from '../../data/formInputs';
 
-
-
 const initialState = {
   election_year: '',
   election_round: '',
