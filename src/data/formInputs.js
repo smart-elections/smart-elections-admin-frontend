@@ -104,23 +104,7 @@ export const addElectionInputs = [
     label: 'Election Year',
   },
   {
-    id: 2,
-    name: 'election_type',
-    type: 'text',
-    placeholder: 'Election Type',
-    required: true,
-    label: 'Election Type',
-  },
-  {
     id: 3,
-    name: 'election_round',
-    type: 'text',
-    placeholder: 'Election Round',
-    required: true,
-    label: 'Election Round',
-  },
-  {
-    id: 4,
     name: 'election_start',
     type: 'date',
     min: new Date().toISOString().slice(0, 10),
@@ -129,7 +113,7 @@ export const addElectionInputs = [
     label: 'Election Start Date',
   },
   {
-    id: 5,
+    id: 4,
     name: 'election_end',
     type: 'date',
     min: new Date().toISOString().slice(0, 10),
