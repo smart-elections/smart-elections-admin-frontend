@@ -26,20 +26,44 @@ const Sidebar = () => {
       <hr />
       <div className='center'>
         <ul className='centerUnorderedList'>
+          <p className='title'>Citizens</p>
+          <NavLink
+            to='/citizens/view-all'
+            className={({ isActive }) =>
+              isActive ? 'activeNavLink' : 'navLink'
+            }
+          >
+            <li>
+              <SupervisorAccountOutlinedIcon className='icon' />
+              <span>View All Citizens</span>
+            </li>
+          </NavLink>
+          <NavLink
+            to='/citizens/add-new-citizen'
+            className={({ isActive }) =>
+              isActive ? 'activeNavLink' : 'navLink'
+            }
+          >
+            <li>
+              <PersonAddAltOutlinedIcon className='icon' />
+              <span>Add Citizen</span>
+            </li>
+          </NavLink>
+
           <p className='title'>Accounts</p>
           <NavLink
-            to='/all-accounts'
+            to='/accounts/view-all'
             className={({ isActive }) =>
               isActive ? 'activeNavLink' : 'navLink'
             }
           >
             <li>
               <SupervisedUserCircleOutlinedIcon className='icon' />
-              <span>All Accounts</span>
+              <span>View All Accounts</span>
             </li>
           </NavLink>
           <NavLink
-            to='/create-new-account'
+            to='/accounts/create-new-account'
             className={({ isActive }) =>
               isActive ? 'activeNavLink' : 'navLink'
             }
@@ -49,44 +73,21 @@ const Sidebar = () => {
               <span>Create New Account</span>
             </li>
           </NavLink>
-          <p className='title'>Citizens</p>
-          <NavLink
-            to='/all-citizens'
-            className={({ isActive }) =>
-              isActive ? 'activeNavLink' : 'navLink'
-            }
-          >
-            <li>
-              <SupervisorAccountOutlinedIcon className='icon' />
-              <span>All Citizens</span>
-            </li>
-          </NavLink>
-          <NavLink
-            to='/add-new-citizen'
-            className={({ isActive }) =>
-              isActive ? 'activeNavLink' : 'navLink'
-            }
-          >
-            <li>
-              <SupervisorAccountOutlinedIcon className='icon' />
-              <span>Add Citizen</span>
-            </li>
-          </NavLink>
 
           <p className='title'>Candidates</p>
           <NavLink
-            to='/all-candidates'
+            to='/candidates/view-all'
             className={({ isActive }) =>
               isActive ? 'activeNavLink' : 'navLink'
             }
           >
             <li>
               <PeopleAltOutlinedIcon className='icon' />
-              <span>All Candidates</span>
+              <span>View All Candidates</span>
             </li>
           </NavLink>
           <NavLink
-            to='/add-new-candidate'
+            to='/candidates/add-new-candidate'
             className={({ isActive }) =>
               isActive ? 'activeNavLink' : 'navLink'
             }
@@ -99,19 +100,19 @@ const Sidebar = () => {
 
           <p className='title'>Elections</p>
           <NavLink
-            to='/all-elections'
+            to='/elections/view-all'
             className={({ isActive }) =>
               isActive ? 'activeNavLink' : 'navLink'
             }
           >
             <li>
               <BallotOutlinedIcon className='icon' />
-              <span>All elections</span>
+              <span>View All elections</span>
             </li>
           </NavLink>
 
           <NavLink
-            to='/add-new-election'
+            to='/elections/add-new-election'
             className={({ isActive }) =>
               isActive ? 'activeNavLink' : 'navLink'
             }
