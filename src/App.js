@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
 // Styles
@@ -12,6 +12,14 @@ import 'react-toastify/dist/ReactToastify.css';
 import useAppStateContext from './hooks/useAppStateContext';
 
 // Pages
+import AllCitizens from './pages/citizens/AllCitizens';
+import AddNewCitizens from './pages/citizens/AddNewCitizens';
+import AllAccounts from './pages/accounts/AllAccounts';
+import CreateNewAccounts from './pages/accounts/CreateNewAccounts';
+import AllCandidates from './pages/candidates/AllCandidates';
+import AddNewCandidate from './pages/candidates/AddNewCandidate';
+import AllElections from './pages/elections/AllElections';
+import AddNewElection from './pages/elections/AddNewElection';
 import NotFound from './pages/notFound/NotFound';
 
 // components
@@ -49,25 +57,41 @@ const App = () => {
           <div className='routesWrapper'>
             <Routes>
               <Route path='/'>
-                {/* <Route index element={<Analysis />} /> */}
-                {/* <Route path='login' element={<Login />} /> */}
+                <Route index element={<Navigate to='elections/view-all' />} />
 
-                {/* <Route path='elections'>
-                  <Route index element={<Elections />} />
+                {/* "citizens/view-all"
+                "citizens/add-new-citizen" */}
+                <Route path='citizens'>
+                  <Route path='view-all' element={<AllCitizens />} />
+                  <Route path='add-new-citizen' element={<AddNewCitizens />} />
+                </Route>
+
+                {/* "accounts/view-all"
+                "accounts/create-new" */}
+                <Route path='accounts'>
+                  <Route path='view-all' element={<AllAccounts />} />
                   <Route
-                    path='voting/:year/:electionId'
-                    element={<ElectionVoting />}
-                  />
-                  <Route
-                    path='analytics/:year/:electionId'
-                    element={<ElectionAnalytics />}
+                    path='create-new-account'
+                    element={<CreateNewAccounts />}
                   />
                 </Route>
 
+                {/* "candidates/view-all"
+                "candidates/add-new-candidate" */}
                 <Route path='candidates'>
-                  <Route index element={<Candidates />} />
-                  <Route path=':candidateId' element={<SingleCandidate />} />
-                </Route> */}
+                  <Route path='view-all' element={<AllCandidates />} />
+                  <Route
+                    path='add-new-candidate'
+                    element={<AddNewCandidate />}
+                  />
+                </Route>
+
+                {/* "elections/view-all"
+                "elections/add-new-election" */}
+                <Route path='elections'>
+                  <Route path='view-all' element={<AllElections />} />
+                  <Route path='add-new-election' element={<AddNewElection />} />
+                </Route>
               </Route>
 
               <Route path='*' element={<NotFound />} />
