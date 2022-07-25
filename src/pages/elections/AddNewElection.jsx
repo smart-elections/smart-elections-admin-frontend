@@ -5,32 +5,30 @@ import { addElectionFormValidation } from '../../utils/formValidation';
 import FormInput from '../../components/formInput/FormInput';
 import { addElectionInputs } from '../../data/formInputs';
 
+import { addElection } from '../../services/elections.service';
+
 const initialState = {
   election_year: '',
   election_type: '',
   election_round: '',
   election_start: '',
   election_end: '',
-}
+};
 
 const AddNewElection = () => {
-
   const [formValues, setFormValues] = useState(initialState);
   const [formErrors, setFormErrors] = useState({});
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = new FormData(e.target);
-
-    const data = {};
-    for (let key of formData.keys()) {
-      data[key] = formData.get(key);
-    }
-    console.log(data);
+    console.log(formValues);
 
     const noErrors = Object.values(formErrors).every((err) => err === '');
     if (noErrors) {
-      //TODO: call backend 'addElection'
+      addElection(formValues);
+      // reset form
+
+      setFormValues(initialState);
     }
   };
 
@@ -55,6 +53,41 @@ const AddNewElection = () => {
             inputLabel={input.label}
           />
         ))}
+        <div className='selectInput'>
+          <label htmlFor='electionType'>Election Type</label>
+          <select
+            aria-label='Election Type select'
+            id='electionType'
+            name='election_type'
+            value={formValues['election_type']}
+            onChange={onInputChange}
+            required
+          >
+            <option value='' disabled>
+              Select your election type...
+            </option>
+            <option value='1'>Presidential</option>
+            <option value='2'>Parliamentary</option>
+            <option value='3'>Local</option>
+          </select>
+        </div>
+        <div className='selectInput' style={{ marginTop: '10px' }}>
+          <label htmlFor='electionRound'>Election Round</label>
+          <select
+            aria-label='Election Round select'
+            id='electionRound'
+            name='election_round'
+            value={formValues['election_round']}
+            onChange={onInputChange}
+            required
+          >
+            <option value='' disabled>
+              Select your election round...
+            </option>
+            <option value='1'>1st</option>
+            <option value='2'>2nd</option>
+          </select>
+        </div>
         <button type='submit' className='addElectionButton'>
           Add Election
         </button>
