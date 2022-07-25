@@ -132,6 +132,7 @@ export const addElectionInputs = [
     id: 5,
     name: 'election_end',
     type: 'date',
+    min: '2022-07-25',
     placeholder: 'Election End Date',
     required: true,
     label: 'Election End Date',
