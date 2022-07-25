@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState, useEffect } from 'react'
-
+import axios from "axios";
+import MUIDataTable from "mui-datatables";
+import { CircularProgress, Typography } from "@material-ui/core";
 import './candidates.scss';
 
 const AllCandidates = () => {
