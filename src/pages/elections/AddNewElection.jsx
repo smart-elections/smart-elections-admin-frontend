@@ -67,7 +67,7 @@ const AddNewElection = () => {
               Select your election type...
             </option>
             <option value='1'>Presidential</option>
-            <option value='2'>Parliamentary</option>
+            <option value='2'>Legislative</option>
             <option value='3'>Local</option>
           </select>
         </div>
