@@ -66,7 +66,7 @@ const AddNewCandidate = () => {
               Select your election type...
             </option>
             <option value='1'>Presidential</option>
-            <option value='2'>Parliamentary</option>
+            <option value='2'>Legislative</option>
             <option value='3'>Local</option>
           </select>
         </div>
@@ -88,7 +88,7 @@ const AddNewCandidate = () => {
           </select>
         </div>
         <div className='selectInput' style={{ marginTop: '10px' }}>
-          <label htmlFor='citizenNationality'>Citizen Nationality</label>
+          <label htmlFor='citizenNationality'>Candidate Nationality</label>
           <select
             aria-label='Citizen Nationality select'
             id='citizenNationality'
