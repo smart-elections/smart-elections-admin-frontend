@@ -14,8 +14,6 @@ import useAppStateContext from './hooks/useAppStateContext';
 // Pages
 import AllCitizens from './pages/citizens/AllCitizens';
 import AddNewCitizens from './pages/citizens/AddNewCitizens';
-import AllAccounts from './pages/accounts/AllAccounts';
-import CreateNewAccounts from './pages/accounts/CreateNewAccounts';
 import AllCandidates from './pages/candidates/AllCandidates';
 import AddNewCandidate from './pages/candidates/AddNewCandidate';
 import AllElections from './pages/elections/AllElections';
@@ -64,15 +62,7 @@ const App = () => {
                   <Route path='view-all' element={<AllCitizens />} />
                   <Route path='add-new-citizen' element={<AddNewCitizens />} />
                 </Route>
-                {/* "accounts/view-all"
-                "accounts/create-new" */}
-                <Route path='accounts'>
-                  <Route path='view-all' element={<AllAccounts />} />
-                  <Route
-                    path='create-new-account'
-                    element={<CreateNewAccounts />}
-                  />
-                </Route>
+
                 {/* "candidates/view-all"
                 "candidates/add-new-candidate" */}
                 <Route path='candidates'>
