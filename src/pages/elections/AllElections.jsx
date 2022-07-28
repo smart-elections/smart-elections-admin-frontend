@@ -1,11 +1,10 @@
 import React from 'react';
-import { useState, useEffect } from 'react'
-import axios from "axios";
-import MUIDataTable from "mui-datatables";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import MUIDataTable from 'mui-datatables';
 import './elections.scss';
 
 const AllElections = () => {
-
   const [elections, setElections] = useState([]);
 
   const options = {
@@ -20,32 +19,53 @@ const AllElections = () => {
     viewColumns: false,
   };
 
-  const baseUrl = "http://ec2-34-207-166-28.compute-1.amazonaws.com:8000/elections";
-
   const getData = async () => {
-    const response = await axios.get(baseUrl);
+    const response = await axios.get('/elections');
     setElections(response.data.data);
-  }
+  };
 
   useEffect(() => {
     getData();
-  }
-    , [])
+  }, []);
 
   const columns = [
-    { name: "election_id", label: "Election ID", options: { display: 'false', filter: false } },
-    { name: "election_year", label: "Election Year", options: { display: 'true', filter: true } },
-    { name: "election_type", label: "Election Type", options: { display: 'true', filter: true } },
-    { name: "election_round", label: "Election Round", options: { display: 'true', filter: true } },
-    { name: "election_start", label: "Start Date", options: { display: 'true', filter: false } },
-    { name: "election_end", label: "End Date", options: { display: 'true', filter: false } },
-  ]
+    {
+      name: 'election_id',
+      label: 'Election ID',
+      options: { display: 'false', filter: false },
+    },
+    {
+      name: 'election_year',
+      label: 'Election Year',
+      options: { display: 'true', filter: true },
+    },
+    {
+      name: 'election_type',
+      label: 'Election Type',
+      options: { display: 'true', filter: true },
+    },
+    {
+      name: 'election_round',
+      label: 'Election Round',
+      options: { display: 'true', filter: true },
+    },
+    {
+      name: 'election_start',
+      label: 'Start Date',
+      options: { display: 'true', filter: false },
+    },
+    {
+      name: 'election_end',
+      label: 'End Date',
+      options: { display: 'true', filter: false },
+    },
+  ];
 
   return (
     <div>
       <MUIDataTable
         className='electionsTable'
-        title={"All Elections"}
+        title={'All Elections'}
         columns={columns}
         data={elections}
         options={options}
