@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import './candidates.scss';
 
 import { addCandidateFormValidation } from '../../utils/formValidation';
@@ -19,10 +20,29 @@ const initialState = {
   citizen_nationality: '',
 };
 
+var today = new Date();
+var dd = String(today.getDate()).padStart(2, '0');
+var mm = String(today.getMonth() + 1).padStart(2, '0');
+var yyyy = today.getFullYear();
+today = yyyy + '-' + mm + '-' + dd;
+
 const AddNewCandidate = () => {
+  const [latestElections, setLatestElections] = useState([]);
+  const [selectedElection, setSelectedElection] = useState('');
+
   const [formValues, setFormValues] = useState(initialState);
   const [formErrors, setFormErrors] = useState({});
   const [picData, setPicData] = useState('');
+
+  useEffect(() => {
+    const fetchElectionsData = async () => {
+      const {
+        data: { data },
+      } = await axios(`/elections?start=${today}`);
+      setLatestElections(data);
+    };
+    fetchElectionsData();
+  }, []);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,7 +59,21 @@ const AddNewCandidate = () => {
   const onInputChange = (e) => {
     let { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
+    console.log(formValues);
     addCandidateFormValidation(setFormErrors, name, value);
+  };
+
+  const onElectionSelectChange = (e) => {
+    let { value } = e.target;
+    setSelectedElection(value);
+    const [year, round, type] = value.split('&');
+
+    setFormValues({
+      ...formValues,
+      election_year: year.substring(year.indexOf('=') + 1),
+      election_round: round.substring(round.indexOf('=') + 1),
+      election_type: type.substring(type.indexOf('=') + 1),
+    });
   };
 
   const handleCompressedUpload = async (image) => {
@@ -96,41 +130,38 @@ const AddNewCandidate = () => {
             inputLabel={input.label}
           />
         ))}
+
         <div className='selectInput'>
-          <label htmlFor='electionType'>Election Type</label>
+          <label htmlFor='election-select'>Election</label>
           <select
-            aria-label='Election Type select'
-            id='electionType'
-            name='election_type'
-            value={formValues['election_type']}
-            onChange={onInputChange}
+            aria-label='Election select'
+            id='election-select'
+            value={selectedElection}
+            onChange={onElectionSelectChange}
             required
           >
             <option value='' disabled>
-              Select your election type...
+              Select your election
             </option>
-            <option value='1'>Presidential</option>
-            <option value='2'>Legislative</option>
-            <option value='3'>Local</option>
+            {latestElections.map((election) => {
+              return (
+                <option
+                  key={election.election_id}
+                  value={`year=${election.election_year}&round=${election.election_round}&type=${election.election_type}`}
+                >
+                  {election.election_type === 1
+                    ? 'Presidential'
+                    : election.election_type === 2
+                    ? 'Legislative'
+                    : 'Local'}{' '}
+                  {election.election_year}{' '}
+                  {election.election_round === 1 ? '1st' : '2nd'}
+                </option>
+              );
+            })}
           </select>
         </div>
-        <div className='selectInput' style={{ marginTop: '10px' }}>
-          <label htmlFor='electionRound'>Election Round</label>
-          <select
-            aria-label='Election Round select'
-            id='electionRound'
-            name='election_round'
-            value={formValues['election_round']}
-            onChange={onInputChange}
-            required
-          >
-            <option value='' disabled>
-              Select your election round...
-            </option>
-            <option value='1'>1st</option>
-            <option value='2'>2nd</option>
-          </select>
-        </div>
+
         <div className='selectInput' style={{ marginTop: '10px' }}>
           <label htmlFor='citizenNationality'>Candidate Nationality</label>
           <select

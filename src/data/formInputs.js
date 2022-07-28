@@ -15,15 +15,6 @@ export const addCandidateInputs = [
     required: true,
     label: 'Candidate Political Party',
   },
-  {
-    id: 3,
-    name: 'election_year',
-    type: 'number',
-    min: 2022,
-    placeholder: 'Election Year',
-    required: true,
-    label: 'Election Year',
-  },
 ];
 
 export const addCitizenInputs = [
