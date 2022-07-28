@@ -4,8 +4,6 @@ import Logo from '../../assets/images/Logo.png';
 
 // Material UI Icons
 import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
-import PersonAddOutlinedIcon from '@mui/icons-material/PersonAddOutlined';
-import SupervisedUserCircleOutlinedIcon from '@mui/icons-material/SupervisedUserCircleOutlined';
 import PersonAddAltOutlinedIcon from '@mui/icons-material/PersonAddAltOutlined';
 import SupervisorAccountOutlinedIcon from '@mui/icons-material/SupervisorAccountOutlined';
 import BallotOutlinedIcon from '@mui/icons-material/BallotOutlined';
@@ -47,30 +45,6 @@ const Sidebar = () => {
             <li>
               <PersonAddAltOutlinedIcon className='icon' />
               <span>Add Citizen</span>
-            </li>
-          </NavLink>
-
-          <p className='title'>Accounts</p>
-          <NavLink
-            to='/accounts/view-all'
-            className={({ isActive }) =>
-              isActive ? 'activeNavLink' : 'navLink'
-            }
-          >
-            <li>
-              <SupervisedUserCircleOutlinedIcon className='icon' />
-              <span>View All Accounts</span>
-            </li>
-          </NavLink>
-          <NavLink
-            to='/accounts/create-new-account'
-            className={({ isActive }) =>
-              isActive ? 'activeNavLink' : 'navLink'
-            }
-          >
-            <li>
-              <PersonAddOutlinedIcon className='icon' />
-              <span>Create New Account</span>
             </li>
           </NavLink>
 

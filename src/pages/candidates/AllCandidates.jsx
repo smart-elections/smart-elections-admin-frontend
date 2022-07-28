@@ -19,11 +19,8 @@ const AllCandidates = () => {
     viewColumns: false,
   };
 
-  const baseUrl =
-    'http://ec2-44-202-30-87.compute-1.amazonaws.com:8000/elections/candidates';
-
   const getData = async () => {
-    const response = await axios.get(baseUrl);
+    const response = await axios.get('/elections/candidates');
     setCandidates(response.data.data);
   };
 
