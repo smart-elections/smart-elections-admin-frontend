@@ -1,12 +1,10 @@
 import React from 'react';
-import { useState, useEffect } from 'react'
-import axios from "axios";
-import MUIDataTable from "mui-datatables";
-import { Select, MenuItem } from "@material-ui/core";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import MUIDataTable from 'mui-datatables';
 import './candidates.scss';
 
 const AllCandidates = () => {
-
   const [candidates, setCandidates] = useState([]);
 
   const options = {
@@ -21,35 +19,71 @@ const AllCandidates = () => {
     viewColumns: false,
   };
 
-  const baseUrl = "http://ec2-34-207-166-28.compute-1.amazonaws.com:8000/elections/candidates";
+  const baseUrl =
+    'http://ec2-44-202-30-87.compute-1.amazonaws.com:8000/elections/candidates';
 
   const getData = async () => {
     const response = await axios.get(baseUrl);
     setCandidates(response.data.data);
-  }
+  };
 
   useEffect(() => {
     getData();
-  }
-    , [])
+  }, []);
 
   const columns = [
-    { name: "election_id", label: "Election ID", options: { display: 'false', filter: false } },
-    { name: "election_year", label: "Election Year", options: { display: 'true', filter: false } },
-    { name: "election_type", label: "Election Type", options: { display: 'true', filter: false } },
-    { name: "election_round", label: "Election Round", options: { display: 'true', filter: false } },
-    { name: "candidate_id", label: "Candidate ID", options: { display: 'false', filter: false } },
-    { name: "citizen_firstname", label: "First Name", options: { display: 'true', filter: false } },
-    { name: "citizen_lastname", label: "Last Name", options: { display: 'true', filter: false } },
-    { name: "candidate_party", label: "Political Party", options: { display: 'true' } },
-    { name: "citizen_ssn", label: "Social Security Number", options: { display: 'true' } }
-  ]
+    {
+      name: 'election_id',
+      label: 'Election ID',
+      options: { display: 'false', filter: false },
+    },
+    {
+      name: 'election_year',
+      label: 'Election Year',
+      options: { display: 'true' },
+    },
+    {
+      name: 'election_type',
+      label: 'Election Type',
+      options: { display: 'true' },
+    },
+    {
+      name: 'election_round',
+      label: 'Election Round',
+      options: { display: 'true' },
+    },
+    {
+      name: 'candidate_id',
+      label: 'Candidate ID',
+      options: { display: 'false', filter: false },
+    },
+    {
+      name: 'citizen_firstname',
+      label: 'First Name',
+      options: { display: 'true', filter: false },
+    },
+    {
+      name: 'citizen_lastname',
+      label: 'Last Name',
+      options: { display: 'true', filter: false },
+    },
+    {
+      name: 'candidate_party',
+      label: 'Political Party',
+      options: { display: 'true' },
+    },
+    {
+      name: 'citizen_ssn',
+      label: 'Social Security Number',
+      options: { display: 'true', filter: false },
+    },
+  ];
 
   return (
     <div>
       <MUIDataTable
         className='candidatesTable'
-        title={"All Candidates"}
+        title={'All Candidates'}
         columns={columns}
         data={candidates}
         options={options}
