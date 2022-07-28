@@ -32,7 +32,7 @@ const AddNewCandidate = () => {
     if (noErrors) {
       addCandidate(formValues, picData.selectedFiles);
       // reset form
-      // setFormValues(initialState);
+      setFormValues(initialState);
     }
   };
 
