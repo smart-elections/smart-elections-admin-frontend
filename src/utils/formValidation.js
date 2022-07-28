@@ -50,10 +50,10 @@ export const addElectionFormValidation = (setFormErrors, name, value) => {
     const errorStateObj = { ...prev, [name]: '' };
 
     switch (name) {
-      case 'election_round':
-        if (!(value === '1st' || value === '2nd')) {
+      case 'election_year':
+        if (!(value >= 2022)) {
           errorStateObj[name] =
-            'Election Round value must be either 1st or 2nd';
+            'Election Year must be greater than or equal to 2022';
         }
         break;
 
