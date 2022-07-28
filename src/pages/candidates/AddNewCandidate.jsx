@@ -6,6 +6,9 @@ import FormInput from '../../components/formInput/FormInput';
 import { addCandidateInputs } from '../../data/formInputs';
 
 import { addCandidate } from '../../services/candidates.service';
+import Button from '@mui/material/Button';
+import ImageIcon from '@mui/icons-material/Image';
+import Compressor from 'compressorjs';
 
 const initialState = {
   election_year: '',
@@ -19,15 +22,17 @@ const initialState = {
 const AddNewCandidate = () => {
   const [formValues, setFormValues] = useState(initialState);
   const [formErrors, setFormErrors] = useState({});
+  const [picData, setPicData] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
+    console.log(formValues);
+    console.log(picData.selectedFiles);
     const noErrors = Object.values(formErrors).every((err) => err === '');
     if (noErrors) {
-      addCandidate(formValues);
+      addCandidate(formValues, picData.selectedFiles);
       // reset form
-      setFormValues(initialState);
+      // setFormValues(initialState);
     }
   };
 
@@ -35,6 +40,45 @@ const AddNewCandidate = () => {
     let { name, value } = e.target;
     setFormValues({ ...formValues, [name]: value });
     addCandidateFormValidation(setFormErrors, name, value);
+  };
+
+  const handleCompressedUpload = async (image) => {
+    return new Promise((resolve, reject) => {
+      try {
+        new Compressor(image, {
+          quality: 0.8, // 0.6 can also be used, but its not recommended to go below.
+
+          success: (compressedResult) => {
+            // compressedResult has the compressed file.
+
+            // Use the compressed file to upload the images to your server.
+
+            resolve({
+              ...picData,
+
+              selectedFiles: compressedResult,
+            });
+          },
+        });
+      } catch (error) {
+        reject(error);
+      }
+    });
+  };
+
+  // arrow function that handles the upload of a new user image
+  const onImageChange = async (event) => {
+    try {
+      if (event.target.files[0].type.toString().includes('image')) {
+        let image = await handleCompressedUpload(event.target.files[0]);
+
+        setPicData(image);
+      } else {
+        alert('File type should be an image');
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -103,6 +147,41 @@ const AddNewCandidate = () => {
             <option value='french'>French</option>
           </select>
         </div>
+
+        <>
+          <input
+            color='primary'
+            accept='image/*'
+            type='file'
+            onChange={onImageChange}
+            id='icon-button-file'
+            style={{ display: 'none' }}
+          />
+          <label htmlFor='icon-button-file'>
+            <Button
+              variant='contained'
+              component='span'
+              className='formInput'
+              size='large'
+              color='primary'
+              style={{
+                marginTop: '15px',
+              }}
+            >
+              <div
+                style={{
+                  display: '  flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                }}
+              >
+                <ImageIcon />
+                <span>&nbsp;&nbsp;Upload Profile Image</span>
+              </div>
+            </Button>
+          </label>
+        </>
+
         <button type='submit' className='addCandidateButton'>
           Add Candidate
         </button>
