@@ -1,11 +1,10 @@
 import React from 'react';
-import { useState, useEffect } from 'react'
-import axios from "axios";
-import MUIDataTable from "mui-datatables";
+import { useState, useEffect } from 'react';
+import axios from 'axios';
+import MUIDataTable from 'mui-datatables';
 import './citizens.scss';
 
 const AllCitizens = () => {
-
   const [citizens, setCitizens] = useState([]);
 
   const options = {
@@ -20,33 +19,53 @@ const AllCitizens = () => {
     viewColumns: false,
   };
 
-  const baseUrl = "http://ec2-34-207-166-28.compute-1.amazonaws.com:8000/citizens";
-
   const getData = async () => {
-    const response = await axios.get(baseUrl);
+    const response = await axios.get('/citizens');
     setCitizens(response.data.data);
-  }
+  };
 
   useEffect(() => {
     getData();
-  }
-    , [])
+  }, []);
 
   const columns = [
-    { name: "citizen_id", label: "Citizen ID", options: { display: 'true', filter: false } },
-    { name: "citizen_ssn", label: "Social Security Number", options: { display: 'false', filter: false } },
-    { name: "citizen_firstname", label: "First Name", options: { display: 'true', filter: false } },
-    { name: "citizen_lastname", label: "Last Name", options: { display: 'true', filter: false } },
-    { name: "citizen_gender", label: "Gender", options: { display: 'true', filter: false } },
-    { name: "citizen_commune", label: "Commune", options: { display: 'false', filter: true } },
-
-  ]
+    {
+      name: 'citizen_id',
+      label: 'Citizen ID',
+      options: { display: 'true', filter: false },
+    },
+    {
+      name: 'citizen_ssn',
+      label: 'Social Security Number',
+      options: { display: 'false', filter: false },
+    },
+    {
+      name: 'citizen_firstname',
+      label: 'First Name',
+      options: { display: 'true', filter: false },
+    },
+    {
+      name: 'citizen_lastname',
+      label: 'Last Name',
+      options: { display: 'true', filter: false },
+    },
+    {
+      name: 'citizen_gender',
+      label: 'Gender',
+      options: { display: 'true', filter: false },
+    },
+    {
+      name: 'citizen_commune',
+      label: 'Commune',
+      options: { display: 'false', filter: true },
+    },
+  ];
 
   return (
     <div>
       <MUIDataTable
         className='citizenstable'
-        title={"All Citizens"}
+        title={'All Citizens'}
         columns={columns}
         data={citizens}
         options={options}
